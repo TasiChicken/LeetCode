@@ -56,17 +56,19 @@ int main()
 {
     Solution solution;
     
-    string input;
-    vector<int> nums;
-    int target;
+    while(true) {
+        string input;
+        vector<int> nums;
+        int target;
 
-    cout << "nums = ";
-    cin >> input;
-    nums = parse_input(input);
-    cout << "target = ";
-    cin >> target;
+        cout << "nums = ";
+        cin >> input;
+        nums = parse_input(input);
+        cout << "target = ";
+        cin >> target;
 
-    cout << print_output(solution.twoSum(nums, target)) << endl;
+        cout << print_output(solution.twoSum(nums, target)) << endl;
+    }
 
     return 0;
 }
