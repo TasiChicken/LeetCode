@@ -46,6 +46,8 @@ ListNode* parse_input(string input) {
     ListNode* first;
     input.erase(input.length() - 1, 1);
     input.erase(0, 1);
+    
+    if(input.length() == 0) return first;
 
     int index = 0;
     ListNode* last;

@@ -14,6 +14,8 @@ vector<int> parse_input(string input) {
     input.erase(input.length() - 1, 1);
     input.erase(0, 1);
 
+    if(input.length() == 0) return nums;
+
     int index = 0;
     for(int i = 0; i <= input.length(); i++) 
         if(input[i] == ',' || i == input.length()) {
@@ -51,7 +53,7 @@ int main()
         cout << "target = ";
         cin >> target;
 
-        cout << print_output(solution.twoSum(nums, target)) << endl;
+        //cout << print_output(solution.twoSum(nums, target)) << endl;
     }
     return 0;
 }
