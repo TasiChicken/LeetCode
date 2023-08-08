@@ -1,4 +1,5 @@
 @echo off
+del "..\*.EXE"
 call getProgress.bat
 
 git add .
