@@ -1,5 +1,5 @@
 @echo off
-set "PROGRESS=0"
+set "PROGRESS=-1"
 
 call getProgress.bat
 set /a "PROGRESS+=1"
