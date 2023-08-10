@@ -46,7 +46,7 @@ string print_output(vector<int> output) {
     string output_string = "[";
     for(int i = 0; i < output.size(); i++) {
         output_string += to_string(output[i]);
-        if(i!= output.size() - 1)
+        if(i != output.size() - 1)
             output_string += ",";
     }
     output_string += "]";
