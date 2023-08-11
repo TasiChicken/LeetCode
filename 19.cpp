@@ -1,5 +1,4 @@
 #include <iostream>
-#include <cstring>
 
 using namespace std;
 
@@ -13,32 +12,20 @@ struct ListNode {
 
 class Solution {
 public:
-    ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
-        ListNode* node = new ListNode(0);
-        addTwoNumbers(l1, l2, node);
-        return node;
-    }
-private:
-    void addTwoNumbers(ListNode* l1, ListNode* l2, ListNode*& node) {
-        if(l1 == nullptr && l2 == nullptr) return;
+    ListNode* removeNthFromEnd(ListNode* head, int n) {
+        ListNode *dummyHead = new ListNode(0, head);
 
-        if(l1 != nullptr) {
-            node->val += l1->val;
-            l1 = l1->next;
+        ListNode *preTarget = dummyHead;
+        ListNode *node = head;
+        for(int i = 1; i < n; i++)
+            node = node->next;
+        while(node->next != NULL){
+            node = node->next;
+            preTarget = preTarget->next;
         }
-        if(l2 != nullptr) {
-            node->val += l2->val;
-            l2 = l2->next;
-        }
+        preTarget->next = preTarget->next->next;
 
-        if(node->val >= 10) {
-            node->val -= 10;
-            node->next = new ListNode(1);
-        }
-        else if (l1 != nullptr || l2 != nullptr)
-            node->next = new ListNode();
-
-        addTwoNumbers(l1, l2, node->next);
+        return dummyHead->next;
     }
 };
 
@@ -84,16 +71,17 @@ int main()
 
     while(true) {
         string input;
-        ListNode *l1, *l2;
+        ListNode *head;
+        int n;
 
-        cout << "l1 = ";
+        cout << "head = ";
         cin >> input;
-        l1 = parse_input(input);
-        cout << "l2 = ";
-        cin >> input;
-        l2 = parse_input(input);
+        head = parse_input(input);
+        cout << "n = ";
+        cin >> n;
 
-        cout << print_output(solution.addTwoNumbers(l1, l2)) << endl;
+        cout << print_output(solution.removeNthFromEnd(head, n)) << endl;
     }
+    
     return 0;
 }

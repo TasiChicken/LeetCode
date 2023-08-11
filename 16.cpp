@@ -1,5 +1,4 @@
 #include <iostream>
-#include <cstring>
 #include <vector>
 #include <algorithm>
 
@@ -7,21 +6,27 @@ using namespace std;
 
 class Solution {
 public:
-    vector<int> twoSum(vector<int>& nums, int target) {
-        vector<int> ans;
+    int threeSumClosest(vector<int>& nums, int target) {
+        auto begin = nums.begin(), end = nums.end(), last = end - 1;
+        sort(nums.begin(), nums.end());
 
-        for(auto i = nums.begin(); i != nums.end(); ) {
-            int another = target - *i;
-            auto j = find(++i, nums.end(), another);
+        int minMargin = INT_MAX;
+        int ans;
+        for(; begin < last; ++begin) 
+            for(auto l = begin + 1, r = last; l < r; ) {
+                int total = *begin + *l + *r;
+                int margin = abs(target - total);
 
-            if(j != nums.end()) {
-                ans.push_back(i - 1 - nums.begin());
-                ans.push_back(j - nums.begin());
-                break;
+                if(margin < minMargin) {
+                    minMargin = margin;
+                    ans = total;
+                }
+
+                if(total < target) l++;
+                else if(total > target) r--;
+                else return total;
             }
-        }
-
-        return ans;
+            return ans;
     }
 };
 
@@ -42,18 +47,6 @@ vector<int> parse_input(string input) {
     return nums;
 }
 
-string print_output(vector<int> output) {
-    string output_string = "[";
-    for(int i = 0; i < output.size(); i++) {
-        output_string += to_string(output[i]);
-        if(i != output.size() - 1)
-            output_string += ",";
-    }
-    output_string += "]";
-
-    return output_string;
-}
-
 int main()
 {
     Solution solution;
@@ -69,7 +62,7 @@ int main()
         cout << "target = ";
         cin >> target;
 
-        cout << print_output(solution.twoSum(nums, target)) << endl;
+        cout << solution.threeSumClosest(nums, target) << endl;
     }
 
     return 0;

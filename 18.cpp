@@ -6,7 +6,7 @@ using namespace std;
 
 class Solution {
 public:
-    vector<vector<int>> threeSum(vector<int>& nums) {
+    vector<vector<int>> fourSum(vector<int>& nums, int target) {
         vector<vector<int>> ans;
         map<int, int> mp;
 
@@ -14,21 +14,26 @@ public:
             mp[num] += 1;
 
         auto _1 = mp.begin();
-        for(; _1 != mp.end() && _1->first < 1; _1++) {
+        int max = target / 4 + 1;
+        for(; _1 != mp.end() && _1->first < max; _1++) {
             _1->second -= 1;
             for(auto _2 = _1->second > 0 ? _1 : next(_1, 1); _2 != mp.end(); _2++) {
-                    long long t = 0ll - _1->first - _2->first;
-                    if(t < _2->first) break;
+                _2->second -= 1;
+                for(auto _3 = _2->second > 0 ? _2 : next(_2, 1); _3 != mp.end(); _3++) {
+                    long long t = (long long)target - _1->first - _2->first - _3->first;
+                    if(t < _3->first) break;
                     if(t < INT_MIN || t > INT_MAX) continue;
 
-                    _2->second -= 1;
+                    _3->second -= 1;
                     
                     int last = (int)t;
                     auto result = mp.find(last);
                     if(result != mp.end() && result->second > 0)
-                        ans.push_back({_1->first, _2->first, last});
+                        ans.push_back({_1->first, _2->first, _3->first, last});
 
-                    _2->second += 1;
+                    _3->second += 1;
+                }
+                _2->second += 1;
             }
         }
 
@@ -80,12 +85,15 @@ int main()
     while(true) {
         string input;
         vector<int> nums;
+        int target;
 
         cout << "nums = ";
         cin >> input;
         nums = parse_input(input);
+        cout << "target = ";
+        cin >> target;
 
-        cout << print_output(solution.threeSum(nums)) << endl;
+        cout << print_output(solution.fourSum(nums, target)) << endl;
         
     }
     
