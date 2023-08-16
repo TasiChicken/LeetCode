@@ -10,7 +10,7 @@ public:
             for(string str : strs)
                 if(i >= str.length() || str[i] != strs[0][i]) return str.substr(0, i);
     }
-/* optimized solution
+/* Optimized Solution
     string longestCommonPrefix(vector<string>& strs) {
         int minLen = INT_MAX;
         string criteria = strs[0];

@@ -38,8 +38,7 @@ private:
         lists[index] = node->next;
         recursion(lists, node);
     }
-/*
-Optimized Solution
+/* Optimized Solution
 public:
     ListNode* mergeKLists(vector<ListNode*>& lists) {
         int size = lists.size();

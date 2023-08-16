@@ -27,7 +27,7 @@ private:
         for(int i = 0; i < times; i++)
             recursion(ans, digits, len, index + 1, cur + (char)(i + start));
     }
-/* Optomzied Solution(maybe)
+/* Optimized Solution(maybe)
 public:
     vector<string> letterCombinations(string digits) {
         int len = digits.length();
