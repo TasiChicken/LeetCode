@@ -3,16 +3,16 @@
 set PROGRESS=-1
 call getProgress.bat
 
-set /p AMOUNT="New Files Amount : "
+::set /p AMOUNT="New Files Amount : "
 
 cd ..\cpps
 setlocal enabledelayedexpansion
 
-:LOOP
-if "%AMOUNT%" == "0" EXIT
+:::LOOP
+::if "%AMOUNT%" == "0" EXIT
 
 set /a PROGRESS+=1
-set /a AMOUNT-=1
+::set /a AMOUNT-=1
 
 set "number=%PROGRESS%"
 set "fol=%cd%"
@@ -24,7 +24,7 @@ for %%i in (1000 100 10) do (
 )
 if not exist "!fol!" mkdir "!fol!"
 copy 0.cpp "!fol!\%PROGRESS%.cpp"
+code "!fol!\%PROGRESS%.cpp"
 
-goto LOOP
-
+::goto LOOP
 endlocal

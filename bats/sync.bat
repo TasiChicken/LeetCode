@@ -10,6 +10,8 @@ set MESSAGE=finish %PROGRESS%
 :GITSYUC
 cd ..
 
+for /r "%cd%\cpps" %%f in (*.exe) do del "%%f"
+
 git add .
 git commit -m "%MESSAGE%"
 
