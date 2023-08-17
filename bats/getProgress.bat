@@ -1,19 +1,22 @@
 @echo off
-cd ..
 setlocal enabledelayedexpansion
 
-set "max_number=0"
+set "oriCd=%cd%"
+cd ..\cpps
 
-for %%f in (*.cpp) do (
-    set "filename=%%~nf"
-    set "number=!filename!"
-    set "number=!number:.cpp=!"
-    
-    if !number! gtr !max_number! (
-        set "max_number=!number!"
-    )
+:LOOP
+set "max_number=0"
+for /d %%d in (%cd%\*) do (
+    set "subFols=%%~nxd"
+    if !subFols! gtr !max_number! set "max_number=!subFols!"
+)
+if !max_number! NEQ 0 (
+    cd %max_number%
+    goto LOOP
 )
 
-endlocal & set "PROGRESS=%max_number%"
+for %%f in (*.cpp) do if %%~nf gtr !max_number! set "max_number=%%~nf"
 
+cd %oriCd%
+endlocal & set "PROGRESS=%max_number%"
 exit /b
