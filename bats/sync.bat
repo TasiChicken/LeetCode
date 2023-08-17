@@ -1,9 +1,20 @@
 @echo off
 del "..\*.EXE"
-call getProgress.bat
 
+
+set /p MESSAGE="Commit Message: "
+
+if "%MESSAGE%" NEQ "" goto GITSYUC
+
+call getProgress.bat
+set MESSAGE=finish %PROGRESS%
+cd bats
+
+:GITSYUC
+
+cd ..
 git add .
-git commit -m "finish %PROGRESS%"
+git commit -m "%MESSAGE%"
 
 git pull origin main
 git push origin main
