@@ -8,9 +8,8 @@ public:
 };
 
 int main() {
-    Solution solution;
-
     while(true) {
+        Solution solution;
         //code here
     }
     
