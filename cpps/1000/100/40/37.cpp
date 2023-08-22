@@ -68,17 +68,17 @@ vector<vector<char>> parse(string s){
 }
 
 void print(vector<vector<char>> v){
-    //cout << "[";
+    cout << "[";
     for(int i = 0; i < v.size(); i++){
-        //cout << "[";
+        cout << "[";
         for(int j = 0; j < v[i].size(); j++){
             cout << "\"" << v[i][j] << "\"";
             if(j != v[i].size() - 1) cout << ",";    
         }
-        //cout << "]";
-        if(i != v.size() - 1) cout << endl; // ",";
+        cout << "]";
+        if(i != v.size() - 1) cout << ",";
     }
-    //cout << "]";
+    cout << "]";
     cout << endl;
 }
 
@@ -91,10 +91,7 @@ int main() {
         cin >> s;
         vector<vector<char>> board = parse(s);
         
-        cout << "board:" << endl;
-        print(board);
         solution.solveSudoku(board);
-        cout << "ans:" << endl;
         print(board);
     }
     

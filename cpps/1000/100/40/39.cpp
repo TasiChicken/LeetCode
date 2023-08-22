@@ -63,7 +63,6 @@ vector<int> parse(string s){
     return v;
 }
 
-
 void print(vector<vector<int>> v){
     cout << "[";
     for(int i = 0; i < v.size(); i++){
