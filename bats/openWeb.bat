@@ -4,5 +4,7 @@
 set ProblemsPerPag=20
 
 call getProgress.bat
-set /a "Page=(%PROGRESS%+%ProblemsPerPag%-1)/%ProblemsPerPag%"
+set /a "Page=(%PROGRESS%+%ProblemsPerPag%)/%ProblemsPerPag%"
 start https://leetcode.com/problemset/all/?page=%Page%
+
+call newFile.bat
