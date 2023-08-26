@@ -1,10 +1,15 @@
 @echo off
 
-::set 20 or 50 or 100
-set ProblemsPerPag=20
-
 call getProgress.bat
-set /a "Page=(%PROGRESS%+%ProblemsPerPag%)/%ProblemsPerPag%"
-start https://leetcode.com/problemset/all/?page=%Page%
+setlocal enabledelayedexpansion
 
+for /l %%i in (1, 1, 5) do (
+    set /a "PROGRESS+=1"
+    set "url=!url!!PROGRESS!+"
+)
+
+set "url=!url:~0,-1!"
+start https://leetcode.com/problemset/all/?search=!url!&page=1
+
+endlocal
 call newFile.bat
