@@ -1,6 +1,6 @@
 @echo off
 
-set /p MESSAGE="Commit Message: "
+set /p MESSAGE="Commit Message([Finish progress] if empty): "
 
 if "%MESSAGE%" NEQ "" goto GITSYUC
 
