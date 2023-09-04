@@ -1,5 +1,5 @@
 #include <iostream>
-
+#include <vector>
 using namespace std;
 
 struct ListNode {
@@ -8,19 +8,6 @@ struct ListNode {
     ListNode() : val(0), next(nullptr) {}
     ListNode(int x) : val(x), next(nullptr) {}
     ListNode(int x, ListNode *next) : val(x), next(next) {}
-};
-
-class Solution {
-public:
-    ListNode* middleNode(ListNode* head) {
-        auto node = head;
-        int count = 0;
-        while(node != nullptr) count++, node = node->next;
-        count >>= 1;
-        while (count--)
-            head = head->next;
-        return head;
-    }
 };
 
 ListNode* parse(string input) {
@@ -55,19 +42,4 @@ void print(ListNode* output) {
             cout << ',';
     }
     cout << ']' << endl;
-}
-
-
-int main() {
-    while(true) {
-        Solution solution;
-        string s;
-        cout << "head = ";
-        cin >> s;
-        auto head = parse(s);
-        
-        print(solution.middleNode(head));
-    }
-    
-    return 0;
 }

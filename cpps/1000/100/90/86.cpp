@@ -11,15 +11,30 @@ struct ListNode {
 };
 
 class Solution {
+    void insert(ListNode* a, ListNode* b){
+        auto temp = b->next;
+        b->next = b->next->next;
+        temp->next = a->next;
+        a->next = temp;
+    }
 public:
-    ListNode* middleNode(ListNode* head) {
-        auto node = head;
-        int count = 0;
-        while(node != nullptr) count++, node = node->next;
-        count >>= 1;
-        while (count--)
+    ListNode* partition(ListNode* head, int x) {
+        ListNode* dummy = new ListNode(0, head);
+        head = dummy;
+        while(head->next && head->next->val < x) head = head->next;
+        
+        auto node = head->next;
+        if(!node) return dummy->next;
+        
+        while(node->next){
+            while(node->next->val >= x){
+                node = node->next;
+                if(!node->next) return dummy->next;
+            }
+            insert(head, node);
             head = head->next;
-        return head;
+        }
+        return dummy->next;
     }
 };
 
@@ -65,8 +80,11 @@ int main() {
         cout << "head = ";
         cin >> s;
         auto head = parse(s);
+        int x;
+        cout << "x = ";
+        cin >> x;
         
-        print(solution.middleNode(head));
+        print(solution.partition(head, x));
     }
     
     return 0;
