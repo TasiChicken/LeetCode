@@ -1,27 +1,9 @@
 #include <iostream>
 #include <vector>
-#include <algorithm>
 
 using namespace std;
 
-class Solution {
-public:
-    int findLongestChain(vector<vector<int>>& pairs) {
-        sort(pairs.begin(), pairs.end(), [] (vector<int>& a, vector<int>& b){
-            return a[1] < b[1];
-        });
-        
-        int counter = 1, time = pairs[0][1];
-        for(int i = 1; i < pairs.size(); i++)
-            if(pairs[i][0] > time){
-                counter++;
-                time = pairs[i][1];
-            }
-        return counter;
-    }
-};
-
-vector<int> parse_(string s){
+vector<int> parse(string s){
     vector<int> v;
     int last = 1;
     for(int i = 2; i < s.length(); i++)
@@ -32,24 +14,48 @@ vector<int> parse_(string s){
     return v;
 }
 
-vector<vector<int>> parse(string s){
-    vector<vector<int>> v;
-    int last;
-    for(int i = 1; i < s.length() - 1; i++)
-        if(s[i] == '[') last = i;
-        else if(s[i] == ']') v.push_back(parse_(s.substr(last, i - last + 1)));
-    return v;
+void print(vector<int> v){
+    cout << "[";
+    for(int i = 0; i < v.size(); i++){
+        cout << v[i];
+        if(i != v.size() - 1) cout << ",";
+    }
+    cout << "]";
+    cout << endl;
 }
+
+class Solution {
+public:
+    void merge(vector<int>& nums1, int m, vector<int>& nums2, int n) {
+        for(int i = m; i-- > 0;) nums1[n + i] = nums1[i];
+        
+        int p1 = 0, p2 = 0;
+        for(int i = 0; p2 < n && i < m + n; i++){
+
+            if(p1 < m && nums1[n + p1] < nums2[p2]) nums1[i] = nums1[n + p1++];
+            else nums1[i] = nums2[p2++];
+        }
+    }
+};
 
 int main() {
     while(true) {
         Solution solution;
         string s;
-        cout << "pairs = ";
+        cout << "num1 = ";
         cin >> s;
-        auto pairs = parse(s);
-        
-        cout << solution.findLongestChain(pairs) << endl;
+        auto nums1 = parse(s);
+        int n, m;
+        cout << "m = ";
+        cin >> m;
+        cout << "num2 = ";
+        cin >> s;
+        auto nums2 = parse(s);
+        cout << "n = ";
+        cin >> n;
+
+        solution.merge(nums1, m, nums2, n);
+        print(nums1);
     }
     
     return 0;

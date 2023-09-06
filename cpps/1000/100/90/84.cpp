@@ -1,72 +1,50 @@
 #include <iostream>
+#include <vector>
 
 using namespace std;
 
-struct ListNode {
-    int val;
-    ListNode *next;
-    ListNode() : val(0), next(nullptr) {}
-    ListNode(int x) : val(x), next(nullptr) {}
-    ListNode(int x, ListNode *next) : val(x), next(next) {}
-};
+vector<int> parse(string s){
+    vector<int> v;
+    int last = 1;
+    for(int i = 2; i < s.length(); i++)
+        if(s[i] == ',' || s[i] == ']') {
+            v.push_back(stoi(s.substr(last, i - last)));
+            last = i + 1;
+        }
+    return v;
+}
 
 class Solution {
 public:
-    ListNode* middleNode(ListNode* head) {
-        auto node = head;
-        int count = 0;
-        while(node != nullptr) count++, node = node->next;
-        count >>= 1;
-        while (count--)
-            head = head->next;
-        return head;
-    }
-};
+    int largestRectangleArea(vector<int>& heights) {
+        int ans = 0, size = heights.size(), ptr = -1, h, w;
+        vector<int> last(size);
 
-ListNode* parse(string input) {
-    ListNode* first;
-    input.erase(input.length() - 1, 1);
-    input.erase(0, 1);
-    
-    if(input.length() == 0) return first;
-
-    int index = 0;
-    ListNode* last;
-    for(int i = 0; i <= input.length(); i++) 
-        if(input[i] == ',' || i == input.length()) {
-            int value = stoi(input.substr(index, i - index));
-
-            if(index == 0) first = last = new ListNode(value);
-            else {
-                last->next = new ListNode(value);
-                last = last->next;
+        for(int i = 0; i < size; i++){
+            while(ptr >= 0 && heights[i] < (h = heights[last[ptr]])){
+                w = i - (ptr-- ? last[ptr] + 1 : 0);
+                ans = max(ans, w * h);
             }
-            index = i + 1;
+            last[++ptr] = i;
         }
 
-    return first;
-}
-
-void print(ListNode* output) {
-    cout << '[';
-    for(; output != NULL; output = output->next) {
-        cout << output->val;
-        if(output->next != nullptr)
-            cout << ',';
+        while(ptr >= 0 && 0 < (h = heights[last[ptr]])){
+            w = size - (ptr-- ? last[ptr] + 1 : 0);
+            ans = max(ans, w * h);
+        }
+        return ans;
     }
-    cout << ']' << endl;
-}
-
+};
 
 int main() {
     while(true) {
         Solution solution;
         string s;
-        cout << "head = ";
+        cout << "heights = ";
         cin >> s;
-        auto head = parse(s);
-        
-        print(solution.middleNode(head));
+        auto heights = parse(s);
+
+        cout << solution.largestRectangleArea(heights) << endl;       
     }
     
     return 0;
