@@ -3,21 +3,6 @@
 
 using namespace std;
 
-class Solution {
-public:
-    int minPathSum(vector<vector<int>>& grid) {
-        int m = grid.size(), n = grid[0].size(), i, j;
-        for(i = 1; i < m; i++)
-            grid[i][0] += grid[i - 1][0];
-        for(j = 1; j < n; j++)
-            grid[0][j] += grid[0][j - 1];
-        for(i = 1; i < m; i++)
-            for(j = 1; j < n; j++)
-                grid[i][j] += min(grid[i - 1][j], grid[i][j - 1]);
-        return grid[m - 1][n - 1];
-    }
-};
-
 vector<int> parse(string s){
     vector<int> v;
     int last = 1;
@@ -38,15 +23,26 @@ vector<vector<int>> parse(string s){
     return v;
 }
 
+class Solution {
+public:
+    int minimumTotal(vector<vector<int>>& triangle, int layer = 0, int index = 0) {
+        for(int i = triangle.size() - 2; i >= 0; i--){
+            for(int j = 0; j <= i; j++)
+                triangle[i][j] += min(triangle[i + 1][j], triangle[i + 1][j + 1]);
+        }
+        return triangle[0][0];
+    }
+};
+
 int main() {
     while(true) {
         Solution solution;
         string s;
-        cout << "grid = ";
+        cout << "triangle";
         cin >> s;
-        auto grid = parse(s);
+        auto triangle = parse(s);
 
-        cout << solution.minPathSum(grid) << endl;
+        cout << solution.minimumTotal(triangle) << endl;
     }
     
     return 0;

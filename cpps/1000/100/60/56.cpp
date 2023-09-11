@@ -18,7 +18,7 @@ public:
     }
 };
 
-vector<int> parse_(string s){
+vector<int> parse(string s){
     vector<int> v;
     int last = 1;
     for(int i = 2; i < s.length(); i++)
@@ -34,7 +34,7 @@ vector<vector<int>> parse(string s){
     int last;
     for(int i = 1; i < s.length() - 1; i++)
         if(s[i] == '[') last = i;
-        else if(s[i] == ']') v.push_back(parse_(s.substr(last, i - last + 1)));
+        else if(s[i] == ']') v.push_back(parse(s.substr(last, i - last + 1)));
     return v;
 }
 
