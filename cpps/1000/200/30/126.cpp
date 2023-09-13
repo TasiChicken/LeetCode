@@ -43,7 +43,7 @@ class Solution {
         if(!next[index].size()) ans.push_back(v);
         else 
             for(int i : next[index])
-            addAns(ans, v, wordList, next, i);
+                addAns(ans, v, wordList, next, i);
         v.pop_back();
     }
 public:
@@ -64,8 +64,10 @@ public:
         while(start >= -1){
             int s = start;
             for(; back > s; back--){
-                if(d1(beginWord, wordList[back], n))
+                if(d1(beginWord, wordList[back], n)){
                     addAns(ans, v, wordList, next, back);
+                    continue;
+                }
                 for(int j = s; j > start; j--)
                     if(d1(wordList[j], wordList[back], n))
                         next[j].push_back(back);
