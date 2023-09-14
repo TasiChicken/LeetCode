@@ -3,7 +3,7 @@
 
 using namespace std;
 
-vector<int> parse(string s){
+vector<int> parse_(string s){
     vector<int> v;
     int last = 1;
     for(int i = 2; i < s.length(); i++)
