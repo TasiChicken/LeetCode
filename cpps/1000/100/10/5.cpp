@@ -1,4 +1,5 @@
 #include <iostream>
+#include <vector>
 
 using namespace std;
 
@@ -31,6 +32,41 @@ public:
 
         return s.substr(ansIndex, ansLen);
     }
+/*Optimized Solution
+    string longestPalindrome(string s) {
+        int len = s.length() * 2 + 3;
+        string m;
+        m.reserve(len);
+        m.push_back('!');
+        for(char c : s) m.push_back('_'), m.push_back(c);
+        m.push_back('_'), m.push_back('@');
+        
+        int ansIndex = 0, ansLen = 0, *p = new int[len], mid = 1, r = 1, mir;
+        for(int i = 1; i < len - ansLen - 2; i++){
+            int& cur = p[i];
+            
+            if(i < r){
+                mir = mid * 2 - i;
+                if(i + p[mir] < r){
+                    cur = p[mir];
+                    continue;
+                }
+
+                cur = r - i;
+                if(i + p[mir] > r) continue;
+            }
+            else cur = 0;
+
+            while(m[i + ++cur] == m[i - cur]);
+            r = i + --cur;
+            mid = i;
+
+            if(cur > ansLen) ansIndex = i, ansLen = cur;
+        }
+        
+        return s.substr(ansIndex - ansLen - 1 >> 1, ansLen);
+    }
+*/
 };
 
 int main()
