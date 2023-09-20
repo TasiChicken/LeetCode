@@ -26,9 +26,9 @@ public:
         auto so = new int[s][2];
         for(i = 0; i < s; i++) so[i][0] = so[i][1] = -1;
 
-        unsigned long long index;
+        int inter = (ma - mi + s - 2) / (s - 1), index;
         for(i = 0; i < s; i++){
-            index = (unsigned long long)(nums[i] - mi) * (s - 1) / (ma - mi);
+            index = (nums[i] - mi) / inter;
             if(so[index][0] == -1) so[index][0] = so[index][1] = nums[i];
             else if(so[index][0] > nums[i]) so[index][0] = nums[i];
             else if(so[index][1] < nums[i]) so[index][1] = nums[i];
