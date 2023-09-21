@@ -31,6 +31,6 @@ public:
     }
     
     bool hasNext() {
-        return s.size();
+        return !s.empty();
     }
 };
