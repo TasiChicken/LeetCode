@@ -43,3 +43,33 @@ void print(ListNode* output) {
     }
     cout << ']' << endl;
 }
+
+class Solution {
+public:
+    ListNode* removeElements(ListNode* head, int val) {
+        auto dummy = new ListNode(0, head), pre = dummy;
+        while(head){
+            if(head->val == val) pre->next = head->next;
+            else pre = head;
+            head = head->next;
+        }
+        return dummy->next;
+    }
+};
+
+int main() {
+    while(true) {
+        Solution solution;
+        string s;
+        cout << "head = ";
+        cin >> s;
+        auto head = parse(s);
+        int val;
+        cout << "val = ";
+        cin >> val;
+
+        print(solution.removeElements(head, val));
+    }
+    
+    return 0;
+}
