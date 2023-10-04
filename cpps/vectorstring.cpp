@@ -26,7 +26,7 @@ vector<vector<string>> parse(string s){
 void print(vector<string> v){
     cout << "[";
     for(int i = 0; i < v.size(); i++){
-        cout << '\'' << v[i] << '\'';
+        cout << '\"' << v[i] << '\"';
         if(i != v.size() - 1) cout << ",";
     }
     cout << "]";
@@ -38,7 +38,7 @@ void print(vector<vector<string>> v){
     for(int i = 0; i < v.size(); i++){
         cout << "[";
         for(int j = 0; j < v[i].size(); j++){
-            cout << '\'' << v[i][j] << '\'';
+            cout << '\"' << v[i][j] << '\"';
             if(j != v[i].size() - 1) cout << ",";    
         }
         cout << "]";
