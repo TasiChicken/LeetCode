@@ -45,29 +45,46 @@ TreeNode* parse(string input) {
     return head;
 }
 
-class Solution {
-public:
-    bool hasPathSum(TreeNode* root, int targetSum) {
-        if(!root) return false;
-        targetSum -= root->val;
-        if(!root->left && !root->right) return !targetSum;
-        return hasPathSum(root->left, targetSum) || hasPathSum(root->right, targetSum);
-    }
-};
+void print(TreeNode* output) {
+    cout << '[';
+    queue<TreeNode*> q;
+    int count = output != nullptr;
+    for(q.push(output); count && !q.empty(); q.pop()) {
+        if(q.front()){
+            cout << q.front()->val;
+            q.push(q.front()->left);
+            q.push(q.front()->right);
 
-int main() {
-    while(true) {
-        Solution solution;
-        string s;
-        cout << "root = ";
-        cin >> s;
-        auto root = parse(s);
-        int targetSum;
-        cout << "targetSum = ";
-        cin >> targetSum;
+            count = count - 1 + (q.front()->left != nullptr) + (q.front()->right != nullptr);
+        }
+        else cout << "null";
 
-        cout << solution.hasPathSum(root, targetSum) << endl;
+        if(count) cout << ',';
     }
-    
-    return 0;
+    cout << ']' << endl;
+}
+
+void print(vector<TreeNode*> v){
+    cout << "[";
+    for(int i = 0; i < v.size(); i++){
+        cout << '[';
+        queue<TreeNode*> q;
+        int count = v[i] != nullptr;
+        for(q.push(v[i]); count && !q.empty(); q.pop()) {
+            if(q.front()){
+                cout << q.front()->val;
+                q.push(q.front()->left);
+                q.push(q.front()->right);
+
+                count = count - 1 + (q.front()->left != nullptr) + (q.front()->right != nullptr);
+            }
+            else cout << "null";
+
+            if(count) cout << ',';
+        }
+        cout << ']';
+        if(i != v.size() - 1) cout << ",";
+    }
+    cout << "]";
+    cout << endl;
 }

@@ -1,36 +1,25 @@
 #include <iostream>
-#include <stack>
 
 using namespace std;
 
-struct TreeNode {
-    int val;
-    TreeNode *left;
-    TreeNode *right;
-    TreeNode() : val(0), left(nullptr), right(nullptr) {}
-    TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
-    TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+class Solution {
+public:
+    int trailingZeroes(int n) {
+        int ans = 0;
+        while(n) ans += n /= 5;
+        return ans;
+    }
 };
 
-class BSTIterator {
-    stack<TreeNode*> s;
-    void add(TreeNode* root){
-        while(root) s.push(root), root = root->left;
-    }
-public:
-    BSTIterator(TreeNode* root) {
-        add(root);
-    }
-    
-    int next() {
-        auto n = s.top()->val;
-        auto r = s.top()->right;
-        s.pop();
-        if(r) add(r);
-        return n;
+int main() {
+    while(true) {
+        Solution solution;
+        int n;
+        cout << "n = ";
+        cin >> n;
+
+        cout << solution.trailingZeroes(n) << endl;
     }
     
-    bool hasNext() {
-        return !s.empty();
-    }
-};
+    return 0;
+}

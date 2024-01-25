@@ -45,13 +45,38 @@ TreeNode* parse(string input) {
     return head;
 }
 
+void print(vector<string> v){
+    cout << "[";
+    for(int i = 0; i < v.size(); i++){
+        cout << '\"' << v[i] << '\"';
+        if(i != v.size() - 1) cout << ",";
+    }
+    cout << "]";
+    cout << endl;
+}
+
 class Solution {
+    void recursion(vector<string>& ans, string& s, TreeNode* node){
+        s += to_string(node->val);
+
+        if(!node->left && !node->right) ans.push_back(s);
+        else{
+            s += "->";
+            if(node->left) recursion(ans, s, node->left);
+            if(node->right) recursion(ans, s, node->right);
+        }
+
+        do{
+            s.pop_back();
+        }
+        while(!s.empty() && s.back() != '>');
+    }   
 public:
-    bool hasPathSum(TreeNode* root, int targetSum) {
-        if(!root) return false;
-        targetSum -= root->val;
-        if(!root->left && !root->right) return !targetSum;
-        return hasPathSum(root->left, targetSum) || hasPathSum(root->right, targetSum);
+    vector<string> binaryTreePaths(TreeNode* root) {
+        string s;
+        vector<string> ans;
+        recursion(ans, s, root);
+        return ans;
     }
 };
 
@@ -62,11 +87,8 @@ int main() {
         cout << "root = ";
         cin >> s;
         auto root = parse(s);
-        int targetSum;
-        cout << "targetSum = ";
-        cin >> targetSum;
 
-        cout << solution.hasPathSum(root, targetSum) << endl;
+        print(solution.binaryTreePaths(root));
     }
     
     return 0;

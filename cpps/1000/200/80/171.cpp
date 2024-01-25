@@ -4,9 +4,10 @@ using namespace std;
 
 class Solution {
 public:
-    int trailingZeroes(int n) {
+    int titleToNumber(string columnTitle) {
         int ans = 0;
-        while(n) ans += n /= 5;
+        for(char letter : columnTitle)
+            ans = ans * 26 - 'A' + letter + 1;
         return ans;
     }
 };
@@ -14,11 +15,11 @@ public:
 int main() {
     while(true) {
         Solution solution;
-        int n;
-        cout << "n = ";
-        cin >> n;
+        string columnTitle;
+        cout << "columnTitle = ";
+        cin >> columnTitle;
 
-        cout << solution.trailingZeroes(n) << endl;
+        cout << solution.titleToNumber(columnTitle) << endl;
     }
     
     return 0;
