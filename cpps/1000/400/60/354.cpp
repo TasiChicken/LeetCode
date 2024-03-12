@@ -26,7 +26,7 @@ vector<vector<int>> parse(string s){
 
 class Solution {
     void replace(vector<int>& ws, int num){
-        int l = 1, r = ws.size() - 1;
+        int l = 1, r = ws.size() - 1, mid;
         while(l <= r){
             mid = l + r >> 1;
             if(ws[mid] >= num && ws[mid - 1] < num) {
