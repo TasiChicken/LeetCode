@@ -3,7 +3,7 @@
 using namespace std;
 
 class Solution {
-    int mp[1 << 21];
+    int mp[1 << 21] = {};
 public:
     bool canIWin(int maxChoosableInteger, int desiredTotal, int k = 0) {
         if(mp[k]) return mp[k] == 1;
