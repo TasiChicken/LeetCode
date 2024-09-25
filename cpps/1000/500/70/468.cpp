@@ -26,7 +26,7 @@ class Solution {
                 else num = 0;
             else if(s[i] >= '0' && s[i] <= '9' ||
                 s[i] >= 'a' && s[i] <= 'f' ||
-                s[i] >= 'A' && s[i] <= 'f'){
+                s[i] >= 'A' && s[i] <= 'F'){
                     if(++num > 4) return false;
                 }
             else return false;
