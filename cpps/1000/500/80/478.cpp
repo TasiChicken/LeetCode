@@ -16,8 +16,8 @@ public:
         double angle = (double)rand() / RAND_MAX * 2 * M_PI;
         
         vector<double> ans(2);
-        ans[0] = radius * cos(angle);
-        ans[1] = radius * sin(angle);
+        ans[0] = x_center + radius * cos(angle);
+        ans[1] = y_center + radius * sin(angle);
         return ans;
     }
 };
