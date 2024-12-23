@@ -12,7 +12,7 @@ public:
     }
     
     vector<double> randPoint() {
-        double radius = (double)rand() / RAND_MAX * this->radius;
+        double radius = (double)rand() / RAND_MAX * sqrt(this->radius);
         double angle = (double)rand() / RAND_MAX * 2 * M_PI;
         
         vector<double> ans(2);
