@@ -22,7 +22,7 @@ fi
 cd "$SCRIPT_DIR/.."
 
 # Delete all .exe files recursively in the cpps directory
-find ./cpps -type f -name "*.exe" -exec rm -f {} \;
+find ./cpps -type f -executable -exec rm -f {} \;
 
 # Stage changes and commit
 git add .
