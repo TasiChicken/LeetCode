@@ -59,7 +59,7 @@ class Solution {
     }
 public:
     bool isSubtree(TreeNode* root, TreeNode* subRoot) {
-        string ori, sub;
+        string ori = ",", sub = ",";
         serialize(root, ori);
         serialize(subRoot, sub);
 
