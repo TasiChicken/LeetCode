@@ -6,19 +6,6 @@ class Solution {
     vector<vector<int>> dp;
     string word1;
     string word2;
-    int b_search(vector<int>& arr, int equal_greater){
-        if(arr.empty()) return -1;
-        if(arr[0] >= equal_greater) return arr[0];
-        if(arr.back() < equal_greater) return -1;
-
-        int l = 1, r = arr.size() - 1;
-        while(l < r){
-            int mid = l + r >> 1;
-            if(arr[mid] >= equal_greater) r = mid;
-            else l = mid + 1;
-        }
-        return arr[l];
-    }
     int dfs(int i1, int i2){
         if(i1 == word1.size()) return word2.size() - i2;
         if(i2 == word2.size()) return word1.size() - i1;
